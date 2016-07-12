@@ -1,0 +1,37 @@
+{% extends 'post/base.html' %}
+  {% block content %}
+      <div class="ui card">
+        <div class="content">
+          <div class="right floated meta">{{ posts.create_at }}</div>
+          Admin
+        </div>
+        <h3>{{ posts.title }}</h3>
+        <div class="image">
+          <img src="{{ posts.picture.url }}" width=100% alt="">
+        </div>
+        <div class="content">
+          <span class="left floated">
+            <div class="ui labeled button" tabindex="0">
+              <a href="{% url 'post_like' posts.id %}">
+                  <div class="ui green button">
+                      <i class="thumbs outline up icon"></i>
+                  </div>
+              </a>
+              <a class="ui basic green left pointing label">
+                {{ posts.like }}
+              </a>
+            </div>
+            <div class="ui labeled button" tabindex="0">
+              <a href="{% url 'post_dislike' posts.id %}">
+                <div class="ui red button">
+                  <i class="thumbs outline down icon"></i>
+                </div>
+              </a>
+                <a class="ui basic red left pointing label">
+                  {{ posts.dislike }}
+                </a>
+            </div>
+          </span>
+        </div>
+      </div>
+  {% endblock %}

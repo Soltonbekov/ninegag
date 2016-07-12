@@ -1,0 +1,41 @@
+{% extends 'post/base.html' %}
+  {% block content %}
+    {% for item in category_news %}
+        <div class="ui card">
+          <div class="content">
+            <div class="right floated meta">{{ item.create_at }}</div>
+            Admin
+          </div>
+          <h3><a href="{% url 'post_detail' item.id %}">{{ item.title }}</a></h3>
+          <div class="image">
+            <a href="{% url 'post_detail' item.id %}">
+              <img src="{{ item.picture.url }}" width=100% alt="">
+            </a>
+          </div>
+          <div class="content">
+            <span class="left floated">
+              <div class="ui labeled button" tabindex="0">
+                <a href="{% url 'post_like' item.id %}">
+                    <div class="ui green button">
+                        <i class="thumbs outline up icon"></i>
+                    </div>
+                </a>
+                <a class="ui basic green left pointing label">
+                  {{ item.like }}
+                </a>
+              </div>
+              <div class="ui labeled button" tabindex="0">
+                <a href="{% url 'post_dislike' item.id %}">
+                  <div class="ui red button">
+                    <i class="thumbs outline down icon"></i>
+                  </div>
+                </a>
+                  <a class="ui basic red left pointing label">
+                    {{ item.dislike }}
+                  </a>
+              </div>
+            </span>
+          </div>
+        </div>
+    {% endfor %}
+  {% endblock %}
