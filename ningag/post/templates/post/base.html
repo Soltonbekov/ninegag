@@ -35,6 +35,13 @@
                 <a class="item" href="{% url 'post_sort' 'dislike_desc' %}">Dislike Desc</a>
               </div>
             </div>
+            <div class="ui simple dropdown item">
+              Create new <i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item" href="{% url 'create_category' %}">Category</a>
+                <a class="item" href="{% url 'create_post' %}">Post</a>
+              </div>
+            </div>
             <div class="right menu">
               <div class="ui category search item">
                 <div class="ui transparent icon input">

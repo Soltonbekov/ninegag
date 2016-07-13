@@ -1,0 +1,9 @@
+{% extends 'post/base.html' %}
+  {% block content %}
+    <form class="ui form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+      <div class="ui container">
+      {{ form.as_p }}
+      <input type="submit">
+      </div>
+    </form>
+  {% endblock %}
