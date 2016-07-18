@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from redactor.fields import RedactorField
 
 
 class Categories(models.Model):
@@ -23,7 +24,7 @@ class Post(models.Model):
     category = models.ForeignKey(Categories, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     picture = models.ImageField(upload_to='post/post_picture')
-    text = models.TextField(u"Текст")
+    text = RedactorField(verbose_name=u'Текст') #models.TextField(u"Текст")
     display = models.BooleanField(default=True)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)

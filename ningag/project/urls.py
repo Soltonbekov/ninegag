@@ -2,9 +2,10 @@
 
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from post import views
+from redactor.fields import RedactorField
 
 urlpatterns =  [
     url(r'^admin/', admin.site.urls),
@@ -18,5 +19,6 @@ urlpatterns =  [
     url(r'^category/(?P<slug>[\w-]+)/$', views.post_by_category, name = 'post_by_category'),
     url(r'^create_category/add/$', views.create_category, name = 'create_category'),
     url(r'^create_post/add/$', views.create_post, name = 'create_post'),
+    url(r'^redactor/', include('redactor.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

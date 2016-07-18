@@ -100,12 +100,10 @@ def create_category(request):
 
 def create_post(request):
     categories = Categories.objects.all()
-    form = PostForm()
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
+    form = PostForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
     context = {
         'categories': categories,
         'form': form,
