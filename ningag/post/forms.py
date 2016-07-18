@@ -2,6 +2,7 @@
 
 from django import forms
 from post.models import Post
+from django.core.files.images import get_image_dimensions
 
 
 class PostForm(forms.ModelForm):
@@ -49,10 +50,23 @@ class PostForm(forms.ModelForm):
 
     def clean_picture(self):
         image = self.cleaned_data.get('picture', False)
+        w, h = get_image_dimensions(image)
         if image:
-            if image._size > 1024:
+            if image.size > 2*1024*1024:
                 raise forms.ValidationError(
-                    'Image file too large (> 4MB)'
+                    "Image file size should be less than 2MB"
+                )
+            elif image.size < 10*1024:
+                raise forms.ValidationError(
+                    "Image file size should be more than 1MB"
+                )
+            elif w < 400:
+                raise forms.ValidationError(
+                    "The image is %i pixel wide. It's supposed to be more than 400px" % w
+                )
+            elif h < 400:
+                raise forms.ValidationError(
+                    "The image is %i pixel wide. It's supposed to be more than 400px" % h
                 )
             return image
         else:
@@ -61,7 +75,12 @@ class PostForm(forms.ModelForm):
             )
 
     def clean_slug(self):
-        pass
+        slug = self.cleaned_data['slug']
+        if Post.objects.filter(slug=slug).exists():
+            raise forms.ValidationError(
+                    "The post with %s slug already exist. Please use another slug." % slug
+            )
+        return slug
 
     def clean(self):
         pass
