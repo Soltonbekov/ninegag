@@ -109,3 +109,40 @@ def create_post(request):
         'form': form,
     }
     return render(request, 'post/create_post.html', context)
+
+
+def edit_post(request, post_id):
+    categories = Categories.objects.all()
+    post = Post.objects.get(pk=post_id)
+    form = PostForm(request.POST or None, request.FILES or None, instance=post)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    context = {
+        'categories': categories,
+        'form': form,
+    }
+    return render(request, 'post/edit_post.html', context)
+
+
+def delete_post(request, post_id):
+    #categories = Categories.objects.all()
+    posts = Post.objects.all()
+    post = Post.objects.get(pk=post_id)
+    post.delete()
+    return redirect('/')
+    # context = {
+    #     'posts': posts,
+    #     'categories': categories,
+    # }
+    # return render(request, 'post/post_list.html', context)
+
+
+def find_post(request):
+    categories = Categories.objects.all()
+    posts = Post.objects.filter(title__icontains=request.GET.get('q'))
+    context = {
+        'posts': posts,
+        'categories': categories,
+    }
+    return render(request, 'post/post_list.html', context)

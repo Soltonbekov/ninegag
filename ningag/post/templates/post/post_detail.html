@@ -10,6 +10,19 @@
           <img src="{{ posts.picture.url }}" width=100% alt="">
         </div>
         <div class="content">
+          <a href="{% url 'edit_post' posts.id %}">
+            Edit post
+          </a>
+          <a href="{% url 'delete_post' posts.id %}">
+            Delete post
+          </a>
+<!-- <i class="plus icon"></i>
+<i class="plus square outline icon"></i>
+<i class="radio icon"></i>
+<i class="remove circle icon"></i>
+<i class="remove circle outline icon"></i>
+<i class="remove icon"></i>-->
+
           <span class="left floated">
             <div class="ui labeled button" tabindex="0">
               <a href="{% url 'post_like' posts.id %}">

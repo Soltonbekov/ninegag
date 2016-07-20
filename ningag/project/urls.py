@@ -19,6 +19,9 @@ urlpatterns =  [
     url(r'^category/(?P<slug>[\w-]+)/$', views.post_by_category, name = 'post_by_category'),
     url(r'^create_category/add/$', views.create_category, name = 'create_category'),
     url(r'^create_post/add/$', views.create_post, name = 'create_post'),
+    url(r'^edit_post/(?P<post_id>[0-9]+)/$', views.edit_post, name = 'edit_post'),
+    url(r'^delete_post/(?P<post_id>[0-9]+)/$', views.delete_post, name = 'delete_post'),
+    url(r'^find_post/$', views.find_post, name = 'find_post'),
     url(r'^redactor/', include('redactor.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

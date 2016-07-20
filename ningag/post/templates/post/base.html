@@ -44,10 +44,10 @@
             </div>
             <div class="right menu">
               <div class="ui category search item">
-                <div class="ui transparent icon input">
-                  <input class="prompt" type="text" placeholder="Search GAG...">
-                  <i class="search link icon"></i>
-                </div>
+                <form class="ui transparent icon input" action="{% url 'find_post' %}">
+                  <input class="prompt" type="text" placeholder="Search GAG..." name="q">
+                  <button type="submit">Искать</button>
+                </form>
                 <div class="results"></div>
               </div>
               <div class="item">

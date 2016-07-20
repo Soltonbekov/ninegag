@@ -8,7 +8,7 @@ from redactor.fields import RedactorField
 
 class Categories(models.Model):
     title = models.CharField(u"Заголовок", max_length=255)
-    slug = models.CharField(u"Ссылка",max_length=45, blank=True, null=True)
+    slug = models.CharField(u"Ссылка",max_length=45, blank=True, null=True, unique=True)
 
     class Meta:
         verbose_name = u"категория"
@@ -20,7 +20,7 @@ class Categories(models.Model):
 
 class Post(models.Model):
     title = models.CharField(u"Название", max_length=255)
-    slug = models.CharField(u"Ссылка",max_length=45, blank=True, null=True)
+    slug = models.CharField(u"Ссылка",max_length=45, blank=True, null=True, unique=True)
     category = models.ForeignKey(Categories, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     picture = models.ImageField(upload_to='post/post_picture')
